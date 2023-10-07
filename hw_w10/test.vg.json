@@ -1,0 +1,27 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+      "url": "https://raw.githubusercontent.com/sheena-22/FIT3179-HW/main/hw_w10/world-crime-rate-statistics.csv"
+    },
+    "width": 480,
+    "height": 240,
+    "mark": "line",
+    "encoding": {
+      "x": {
+        "field": "date",
+        "type": "temporal",
+        "timeUnit": "yearmonthdate",
+        "axis": {
+          "title": "Date"
+        }
+      },
+      "y": {
+        "field": " Per 100K Population",
+        "type": "quantitative",
+        "axis": {
+          "title": "Crime Rate Per 100k Population"
+        }
+      }
+    }
+  }
+  
