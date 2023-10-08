@@ -1,0 +1,96 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+        "name": "myData",
+        "url": "https://raw.githubusercontent.com/sheena-22/FIT3179-HW/main/hw_w10/clean_data.csv"
+    },
+    
+    "width": 480,
+    "height": 240,
+    "title": "Crime Rate Per 100k Population Globally",
+    "params": [
+        {
+            "name": "Start_Year",
+            "value": 2000,
+            "bind": {
+                "input": "range",
+                "min": 2000,
+                "max": 2020,
+                "step": 1,
+                "name": "Start year: "
+            }
+        },
+        {
+            "name": "End_Year",
+            "value": 2020,
+            "bind": {
+                "input": "range",
+                "min": 2000,
+                "max": 2020,
+                "step": 1,
+                "name": "End year: "
+            }
+        }
+    ],
+    "transform": [
+        {"filter": {"field": "Year", "gte": {"param": "Start_Year"} }},
+        {"filter": {"field": "Year", "lte": {"param": "End_Year"} }}    ],
+    "layer":[
+        {
+            "mark": "line",
+            "encoding": {
+                "x": {
+                    "field": "Year",
+                    "type": "temporal",
+                    "axis": {
+                        "title": ""
+                    }
+                },
+                "y": {
+                    "field": " Per 100K Population",
+                    "type": "quantitative",
+                    "axis": {
+                        "title": "Crime Rate Per 100k Population"
+                    }
+                }
+            }
+        },
+        {
+            "mark": {
+                "type": "point",
+                "filled": true,
+                "size": 20,
+                "tooltip": true
+            },
+            "encoding": {
+                "x": {
+                    "field": "Year",
+                    "type": "temporal",
+                    "axis": {
+                        "title": ""
+                    }
+                },
+                "y": {
+                    "field": " Per 100K Population",
+                    "type": "quantitative",
+                    "axis": {
+                        "title": "Crime Rate Per 100k Population"
+                    }
+                },
+                "tooltip": [  
+                    {"field": "Year", "type": "temporal", "title": "Year", "format": "%Y"},
+                    {"field": " Per 100K Population", "type": "quantitative", "title": "Crime Rate Per 100k Population"}
+                ],
+                "color": {"datum": "Actual Crime Rate"}
+            }
+        },
+        {
+            "mark": "rule",
+            "encoding": {
+                "y": {
+                    "aggregate": "mean", "field": " Per 100K Population", "type": "quantitative"                },
+                "color": {"datum": "Mean Crime Rate"} 
+            }
+        }
+    ]
+}
