@@ -8,33 +8,7 @@
     "width": 480,
     "height": 240,
     "title": "Crime Rate Per 100k Population Globally",
-    "params": [
-        {
-            "name": "Start_Year",
-            "value": 2000,
-            "bind": {
-                "input": "range",
-                "min": 2000,
-                "max": 2020,
-                "step": 1,
-                "name": "Start year: "
-            }
-        },
-        {
-            "name": "End_Year",
-            "value": 2020,
-            "bind": {
-                "input": "range",
-                "min": 2000,
-                "max": 2020,
-                "step": 1,
-                "name": "End year: "
-            }
-        }
-    ],
-    "transform": [
-        {"filter": {"field": "Year", "gte": {"param": "Start_Year"} }},
-        {"filter": {"field": "Year", "lte": {"param": "End_Year"} }}    ],
+    
     "layer":[
         {
             "mark": "line",
@@ -51,6 +25,9 @@
                     "type": "quantitative",
                     "axis": {
                         "title": "Crime Rate Per 100k Population"
+                    },
+                    "scale": {
+                        "domain": [0, 10]
                     }
                 }
             }
@@ -91,6 +68,21 @@
                     "aggregate": "mean", "field": " Per 100K Population", "type": "quantitative"                },
                 "color": {"datum": "Mean Crime Rate"} 
             }
-        }
+        },
+        {
+            "mark": {
+              "type": "text",
+              "align": "left",
+              "baseline": "middle",
+              "dx": 10, 
+              "dy": -10, 
+              "fontWeight": "bold"
+            },
+            "encoding": {
+                "x": {"aggregate": "argmax", "field": " Per 100K Population", "type": "quantitative"},
+                "y": {"aggregate": "max", "field": " Per 100K Population", "type": "quantitative"},
+                "text": {"aggregate": "max", "field": " Per 100K Population", "type": "quantitative", "format": ".2f"}
+            }
+          }
     ]
 }
